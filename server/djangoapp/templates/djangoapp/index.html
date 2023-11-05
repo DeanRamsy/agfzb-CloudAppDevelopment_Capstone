@@ -17,9 +17,25 @@
     <!--Add a nav bar here -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Dealership Review</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                
+        {% if user.is_authenticated %}
+        <span class="navbar-text">Welcome, {{ user.first_name|default:user.username }}</span>
+        <a class="btn btn-danger" href="{% url 'djangoapp:logout' %}">Signout</a>
+        {% else %}
+        <!-- Login Form and Signup Link (as described earlier) -->
+        <!-- Login Form -->
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password">
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+
+        <!-- Signup Link -->
+        <a class="btn btn-success" href="{% url 'djangoapp:signup' %}">Signup</a>
+        <!-- Display User Info and Signout Button -->
+        </form>
+        {% endif %}
+       
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
